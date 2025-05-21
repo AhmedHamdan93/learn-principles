@@ -1,19 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import { Box, useTheme } from '@mui/material';
 
-// A placeholder for a chart component
-// In a real application, you would use a library like Chart.js or Recharts
 const TaskStatusChart = ({ tasks }) => {
   const { t } = useTranslation();
   const theme = useTheme();
   
-  // Calculate task counts by status
   const todoCount = tasks.filter(task => task.status === 'todo').length;
   const inProgressCount = tasks.filter(task => task.status === 'inProgress').length;
   const reviewCount = tasks.filter(task => task.status === 'review').length;
   const doneCount = tasks.filter(task => task.status === 'done').length;
   
-  // If no tasks, show empty state
   if (tasks.length === 0) {
     return (
       <Box sx={{ 
@@ -29,7 +25,6 @@ const TaskStatusChart = ({ tasks }) => {
     );
   }
   
-  // Colors for different statuses
   const colors = {
     todo: theme.palette.error.main,
     inProgress: theme.palette.warning.main,
@@ -37,12 +32,11 @@ const TaskStatusChart = ({ tasks }) => {
     done: theme.palette.success.main,
   };
   
-  // Total tasks
+
   const total = tasks.length;
   
   return (
     <Box sx={{ width: '100%', height: '200px', position: 'relative' }}>
-      {/* Simple bar chart */}
       <Box sx={{ 
         display: 'flex', 
         height: '160px', 

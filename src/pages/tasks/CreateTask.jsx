@@ -11,14 +11,12 @@ const CreateTask = () => {
   const { createTask, loading, error } = useTaskStore();
   const [message, setMessage] = useState('');
   
-  // Handle form submission
   const handleSubmit = async (taskData) => {
     try {
       const createdTask = await createTask(taskData);
       
       if (createdTask) {
         setMessage(t('tasks.saveSuccess'));
-        // Navigate to task list after short delay
         setTimeout(() => {
           navigate('/tasks');
         }, 1500);

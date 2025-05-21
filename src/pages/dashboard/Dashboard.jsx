@@ -25,17 +25,14 @@ const Dashboard = () => {
   const { user } = useAuth();
   const { tasks, fetchTasks, loading } = useTaskStore();
   
-  // Fetch tasks on component mount
   useEffect(() => {
     fetchTasks();
   }, [fetchTasks]);
   
-  // Navigate to create task page
   const handleCreateTask = () => {
     navigate('/tasks/create');
   };
   
-  // Calculate task statistics
   const totalTasks = tasks.length;
   const completedTasks = tasks.filter(task => task.status === 'done').length;
   const pendingTasks = totalTasks - completedTasks;
@@ -50,17 +47,16 @@ const Dashboard = () => {
           {t('common.welcome')}, {user?.email?.split('@')[0] || 'User'}!
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          {t('dashboard.overview')}
+          {t('common.overview')}
         </Typography>
       </Box>
       
-      {/* Task stats cards */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={6} md={3}>
           <Card>
             <CardContent>
               <Typography color="text.secondary" gutterBottom>
-                {t('dashboard.totalTasks')}
+                {t('common.totalTasks')}
               </Typography>
               <Typography variant="h4" component="div">
                 {totalTasks}
@@ -73,7 +69,7 @@ const Dashboard = () => {
           <Card>
             <CardContent>
               <Typography color="text.secondary" gutterBottom>
-                {t('dashboard.completedTasks')}
+                {t('common.completedTasks')}
               </Typography>
               <Typography variant="h4" component="div">
                 {completedTasks}
@@ -86,7 +82,7 @@ const Dashboard = () => {
           <Card>
             <CardContent>
               <Typography color="text.secondary" gutterBottom>
-                {t('dashboard.pendingTasks')}
+                {t('common.pendingTasks')}
               </Typography>
               <Typography variant="h4" component="div">
                 {pendingTasks}
@@ -99,7 +95,7 @@ const Dashboard = () => {
           <Card>
             <CardContent>
               <Typography color="text.secondary" gutterBottom>
-                {t('dashboard.completionRate')}
+                {t('common.completionRate')}
               </Typography>
               <Typography variant="h4" component="div">
                 {completionRate}%
@@ -109,7 +105,6 @@ const Dashboard = () => {
         </Grid>
       </Grid>
       
-      {/* Task visualization and recent tasks */}
       <Grid container spacing={3}>
         <Grid item xs={12} md={5}>
           <Paper 
@@ -121,7 +116,7 @@ const Dashboard = () => {
             }}
           >
             <Typography variant="h6" sx={{ mb: 2 }}>
-              {t('dashboard.tasksByStatus')}
+              {t('common.tasksByStatus')}
             </Typography>
             <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <TaskStatusChart tasks={tasks} />
@@ -140,7 +135,7 @@ const Dashboard = () => {
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
               <Typography variant="h6">
-                {t('dashboard.recentTasks')}
+                {t('common.recentTasks')}
               </Typography>
               <Button
                 variant="contained"
@@ -148,7 +143,7 @@ const Dashboard = () => {
                 onClick={handleCreateTask}
                 size="small"
               >
-                {t('tasks.addNew')}
+                {t('common.addNew')}
               </Button>
             </Box>
             <RecentTasksList tasks={tasks.slice(0, 5)} loading={loading} />

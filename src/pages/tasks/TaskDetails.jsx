@@ -41,25 +41,20 @@ const TaskDetails = () => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [message, setMessage] = useState('');
   
-  // Find the task to display
   const task = tasks.find((task) => task.id === id);
   
-  // Fetch tasks if not already loaded
   useEffect(() => {
     if (!tasks.length) {
       fetchTasks();
     }
     
-    // Set up real-time subscription
     const subscription = subscribeToTasks(handleRealtimeUpdate);
     
-    // Clean up subscription
     return () => {
       subscription.unsubscribe();
     };
   }, [fetchTasks, tasks.length, handleRealtimeUpdate]);
   
-  // Handle delete confirmation
   const handleConfirmDelete = async () => {
     try {
       const success = await deleteTask(id);
@@ -68,7 +63,6 @@ const TaskDetails = () => {
         setMessage(t('tasks.deleteSuccess'));
         setDeleteDialogOpen(false);
         
-        // Navigate to task list after short delay
         setTimeout(() => {
           navigate('/tasks');
         }, 1500);
@@ -78,7 +72,6 @@ const TaskDetails = () => {
     }
   };
   
-  // Status chip colors
   const statusColors = {
     todo: 'error',
     inProgress: 'warning',
@@ -86,7 +79,6 @@ const TaskDetails = () => {
     done: 'success',
   };
   
-  // Priority chip colors
   const priorityColors = {
     low: 'success',
     medium: 'info',
@@ -94,7 +86,6 @@ const TaskDetails = () => {
     urgent: 'error',
   };
   
-  // Show loading screen if task not loaded yet
   if (loading || !task) {
     return <LoadingScreen />;
   }
@@ -139,7 +130,6 @@ const TaskDetails = () => {
         <Card>
           <CardContent>
             <Grid container spacing={3}>
-              {/* Status and Priority */}
               <Grid item xs={12} sm={6}>
                 <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
                   <Chip
@@ -153,7 +143,6 @@ const TaskDetails = () => {
                 </Box>
               </Grid>
               
-              {/* Due Date */}
               <Grid item xs={12} sm={6}>
                 {task.dueDate && (
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -170,7 +159,6 @@ const TaskDetails = () => {
                 <Divider sx={{ my: 2 }} />
               </Grid>
               
-              {/* Description */}
               <Grid item xs={12}>
                 <Typography variant="h6" gutterBottom>
                   {t('tasks.description')}
@@ -180,7 +168,6 @@ const TaskDetails = () => {
                 </Typography>
               </Grid>
               
-              {/* Created/Updated info */}
               <Grid item xs={12}>
                 <Divider sx={{ my: 2 }} />
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', color: 'text.secondary' }}>
@@ -200,8 +187,6 @@ const TaskDetails = () => {
           </CardContent>
         </Card>
       </Box>
-      
-      {/* Delete confirmation dialog */}
       <ConfirmDialog
         open={deleteDialogOpen}
         title={t('tasks.delete')}

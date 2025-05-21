@@ -52,25 +52,20 @@ const TaskList = () => {
     handleRealtimeUpdate,
   } = useTaskStore();
   
-  // Fetch tasks on component mount
   useEffect(() => {
     fetchTasks();
     
-    // Set up real-time subscription
     const subscription = subscribeToTasks(handleRealtimeUpdate);
     
-    // Clean up subscription
     return () => {
       subscription.unsubscribe();
     };
   }, [fetchTasks, handleRealtimeUpdate]);
   
-  // Handle search input change
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
   
-  // Filter tasks based on search term
   const filteredTasks = tasks.filter((task) => {
     return (
       task.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -78,19 +73,16 @@ const TaskList = () => {
     );
   });
   
-  // Show delete confirmation dialog
   const handleOpenDeleteDialog = (task) => {
     setTaskToDelete(task);
     setDeleteDialogOpen(true);
   };
   
-  // Close delete confirmation dialog
   const handleCloseDeleteDialog = () => {
     setDeleteDialogOpen(false);
     setTaskToDelete(null);
   };
   
-  // Confirm delete task
   const handleConfirmDelete = async () => {
     if (taskToDelete) {
       await deleteTask(taskToDelete.id);
@@ -98,7 +90,6 @@ const TaskList = () => {
     }
   };
   
-  // Status chip colors
   const statusColors = {
     todo: 'error',
     inProgress: 'warning',
@@ -106,7 +97,6 @@ const TaskList = () => {
     done: 'success',
   };
   
-  // Priority chip colors
   const priorityColors = {
     low: 'success',
     medium: 'info',
@@ -114,7 +104,6 @@ const TaskList = () => {
     urgent: 'error',
   };
   
-  // Show loading screen
   if (loading && tasks.length === 0) {
     return <LoadingScreen />;
   }
@@ -136,7 +125,6 @@ const TaskList = () => {
           </Button>
         </Box>
         
-        {/* Search field */}
         <TextField
           fullWidth
           placeholder={t('tasks.search')}
@@ -151,8 +139,7 @@ const TaskList = () => {
             ),
           }}
         />
-        
-        {/* Mobile view: Card layout */}
+
         {isMobile && (
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {filteredTasks.length === 0 ? (
@@ -173,7 +160,6 @@ const TaskList = () => {
           </Box>
         )}
         
-        {/* Desktop view: Table layout */}
         {!isMobile && (
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }}>
@@ -184,7 +170,7 @@ const TaskList = () => {
                   <TableCell>{t('tasks.status')}</TableCell>
                   <TableCell>{t('tasks.priority')}</TableCell>
                   <TableCell>{t('tasks.dueDate')}</TableCell>
-                  <TableCell align="right">{t('common.actions')}</TableCell>
+                  <TableCell align="right">{t('tasks.actions')}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -258,7 +244,6 @@ const TaskList = () => {
         )}
       </Box>
       
-      {/* Delete confirmation dialog */}
       <ConfirmDialog
         open={deleteDialogOpen}
         title={t('tasks.delete')}

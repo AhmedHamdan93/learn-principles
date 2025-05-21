@@ -20,11 +20,9 @@ function App() {
       <ThemeProvider>
         <AuthProvider>
           <Routes>
-            {/* Public routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             
-            {/* Protected routes */}
             <Route
               path="/"
               element={
@@ -42,7 +40,6 @@ function App() {
               <Route path="settings" element={<Settings />} />
             </Route>
             
-            {/* Fallback route */}
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </AuthProvider>

@@ -10,16 +10,14 @@ const AppLayout = () => {
   
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh' }}>
-      {/* Sidebar */}
       <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
       
-      {/* Main content */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           p: 3,
-          pt: { xs: 8, md: 3 }, // Extra padding top on mobile for the app bar
+          pt: { xs: 8, md: 3 },
           width: { md: `calc(100% - 240px)` },
           ml: { md: '240px' },
           maxWidth: '100%',

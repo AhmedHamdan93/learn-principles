@@ -1,6 +1,5 @@
 import { createTheme } from '@mui/material/styles';
 
-// Create a theme instance with light and dark mode
 export const createAppTheme = (mode) => {
   return createTheme({
     palette: {

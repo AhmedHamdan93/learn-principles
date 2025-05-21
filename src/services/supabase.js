@@ -13,6 +13,8 @@ export const supabase = createClient(
   supabaseAnonKey || 'your-anon-key'
 );
 
+
+// -------------------------------
 // ---- Auth Helper Functions ----
 export const signUp = async (email, password) => {
   const { data, error } = await supabase.auth.signUp({
@@ -40,6 +42,9 @@ export const getCurrentUser = async () => {
   return { user: data?.user, error };
 };
 
+
+
+// -----------------------------
 // ---- Tasks API Functions ----
 export const fetchTasks = async () => {
   const { data, error } = await supabase

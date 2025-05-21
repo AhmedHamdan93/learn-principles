@@ -2,6 +2,11 @@ export default {
   app: {
     title: 'TaskMaster',
     tagline: 'Manage your tasks with ease',
+    Dashboard: 'Dashboard',
+    Tasks: 'Tasks',
+    createTask: 'Create Task',
+    Settings: 'Settings',
+
   },
   auth: {
     email: 'Email',
@@ -66,5 +71,17 @@ export default {
     settings: 'Settings',
     darkMode: 'Dark Mode',
     language: 'Language',
+    appearance: 'Appearance',
+    welcome: 'Welcome',
+    overview: 'Overview',
+    totalTasks: 'Total Tasks',
+    completedTasks: 'Completed Tasks',
+    pendingTasks: 'Pending Tasks',
+    completionRate: 'Completion Rate',
+    tasksByStatus: 'Tasks By Status',
+    recentTasks: 'Recent Tasks',
+    addNew: 'Add New',
+    updated:'Updated',
+    created:'Created',
   },
 };

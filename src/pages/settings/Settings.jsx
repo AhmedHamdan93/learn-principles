@@ -21,7 +21,6 @@ const Settings = () => {
   const { t, i18n } = useTranslation();
   const { mode, toggleColorMode } = useThemeContext();
   
-  // Handle language change
   const handleLanguageChange = (event) => {
     i18n.changeLanguage(event.target.value);
   };
@@ -37,11 +36,10 @@ const Settings = () => {
       <Card>
         <CardContent>
           <Typography variant="h6" gutterBottom>
-            {t('settings.appearance')}
+            {t('common.appearance')}
           </Typography>
           
           <Grid container spacing={3}>
-            {/* Theme toggle */}
             <Grid item xs={12}>
               <FormControlLabel
                 control={
@@ -59,7 +57,6 @@ const Settings = () => {
               <Divider />
             </Grid>
             
-            {/* Language selector */}
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <InputLabel id="language-select-label">
@@ -73,7 +70,7 @@ const Settings = () => {
                   onChange={handleLanguageChange}
                 >
                   <MenuItem value="en">English</MenuItem>
-                  <MenuItem value="es">Español</MenuItem>
+                  <MenuItem value="ar">العربية</MenuItem>
                 </Select>
               </FormControl>
             </Grid>

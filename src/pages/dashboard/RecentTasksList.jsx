@@ -15,12 +15,10 @@ const RecentTasksList = ({ tasks, loading }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   
-  // Handle task click to navigate to details
   const handleTaskClick = (id) => {
     navigate(`/tasks/${id}`);
   };
   
-  // Status chip colors
   const statusColors = {
     todo: 'error',
     inProgress: 'warning',
@@ -28,7 +26,6 @@ const RecentTasksList = ({ tasks, loading }) => {
     done: 'success',
   };
   
-  // Priority chip colors
   const priorityColors = {
     low: 'success',
     medium: 'info',
@@ -36,7 +33,6 @@ const RecentTasksList = ({ tasks, loading }) => {
     urgent: 'error',
   };
   
-  // Show loading indicator if loading
   if (loading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', p: 3 }}>
@@ -45,12 +41,11 @@ const RecentTasksList = ({ tasks, loading }) => {
     );
   }
   
-  // Show empty state if no tasks
   if (tasks.length === 0) {
     return (
       <Box sx={{ p: 3, textAlign: 'center' }}>
         <Typography variant="body2" color="text.secondary">
-          {t('tasks.empty')}
+          {t('Empty')}
         </Typography>
       </Box>
     );
@@ -85,7 +80,7 @@ const RecentTasksList = ({ tasks, loading }) => {
               primary={task.name}
               primaryTypographyProps={{
                 fontWeight: 500,
-                sx: { mr: 10 }, // Make space for the chips
+                sx: { mr: 10 },
               }}
               secondary={task.description?.substring(0, 60) + (task.description?.length > 60 ? '...' : '')}
             />

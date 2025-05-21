@@ -21,7 +21,7 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  
+
   const {
     register,
     handleSubmit,
@@ -41,15 +41,14 @@ const Signup = () => {
     setLoading(true);
     setError('');
     setSuccess('');
-    
+
     try {
       const { error } = await signUp(data.email, data.password);
-      
+
       if (error) {
         throw error;
       }
-      
-      // Show success message and redirect to login
+
       setSuccess(t('auth.successSignup'));
       setTimeout(() => {
         navigate('/login');
@@ -62,7 +61,16 @@ const Signup = () => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container
+      maxWidth="sm"
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        marginLeft: '80%'
+      }} >
       <Box
         sx={{
           display: 'flex',
@@ -70,7 +78,6 @@ const Signup = () => {
           alignItems: 'center',
           justifyContent: 'center',
           minHeight: '100vh',
-          py: 4,
         }}
       >
         <Typography
@@ -80,11 +87,11 @@ const Signup = () => {
         >
           {t('app.title')}
         </Typography>
-        
+
         <Typography variant="h5" sx={{ mb: 4 }}>
           {t('auth.signup')}
         </Typography>
-        
+
         <Card sx={{ width: '100%', p: 4 }}>
           <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
             <TextField
@@ -106,7 +113,7 @@ const Signup = () => {
               helperText={errors.email?.message}
               sx={{ mb: 2 }}
             />
-            
+
             <TextField
               margin="normal"
               required
@@ -126,7 +133,7 @@ const Signup = () => {
               helperText={errors.password?.message}
               sx={{ mb: 2 }}
             />
-            
+
             <TextField
               margin="normal"
               required
@@ -142,7 +149,7 @@ const Signup = () => {
               helperText={errors.confirmPassword?.message}
               sx={{ mb: 3 }}
             />
-            
+
             <Button
               type="submit"
               fullWidth
@@ -153,7 +160,7 @@ const Signup = () => {
             >
               {loading ? t('common.loading') : t('auth.signup')}
             </Button>
-            
+
             <Box sx={{ mt: 2, textAlign: 'center' }}>
               <Typography variant="body2">
                 {t('auth.alreadyHaveAccount')}{' '}
@@ -165,7 +172,7 @@ const Signup = () => {
           </Box>
         </Card>
       </Box>
-      
+
       <Snackbar
         open={!!error}
         autoHideDuration={6000}
@@ -175,7 +182,7 @@ const Signup = () => {
           {error}
         </Alert>
       </Snackbar>
-      
+
       <Snackbar
         open={!!success}
         autoHideDuration={6000}

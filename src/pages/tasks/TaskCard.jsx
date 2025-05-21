@@ -18,7 +18,6 @@ import {
 const TaskCard = ({ task, onDelete }) => {
   const { t } = useTranslation();
   
-  // Status chip colors
   const statusColors = {
     todo: 'error',
     inProgress: 'warning',
@@ -26,7 +25,6 @@ const TaskCard = ({ task, onDelete }) => {
     done: 'success',
   };
   
-  // Priority chip colors
   const priorityColors = {
     low: 'success',
     medium: 'info',

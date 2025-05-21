@@ -27,7 +27,6 @@ import {
 import { useAuth } from '../../contexts/AuthContext';
 import { signOut } from '../../services/supabase';
 
-// Drawer width for desktop
 const DRAWER_WIDTH = 240;
 
 const Sidebar = ({ mobileOpen, setMobileOpen }) => {
@@ -38,12 +37,10 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   
-  // Handle drawer toggle
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  
-  // Handle logout
+
   const handleLogout = async () => {
     try {
       await signOut();
@@ -53,38 +50,35 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
     }
   };
   
-  // Close mobile drawer on navigation
   useEffect(() => {
     if (mobileOpen && !isDesktop) {
       setMobileOpen(false);
     }
   }, [location.pathname, isDesktop]);
   
-  // Create nav items
   const navItems = [
     {
-      text: 'Dashboard',
+      text: t('app.Dashboard'),
       icon: <DashboardIcon />,
       path: '/dashboard',
     },
     {
-      text: 'Tasks',
+      text: t('app.Tasks'),
       icon: <TasksIcon />,
       path: '/tasks',
     },
     {
-      text: 'Create Task',
+      text: t('app.createTask'),
       icon: <AddIcon />,
       path: '/tasks/create',
     },
     {
-      text: 'Settings',
+      text: t('app.Settings'),
       icon: <SettingsIcon />,
       path: '/settings',
     },
   ];
   
-  // Drawer content
   const drawerContent = (
     <>
       <Toolbar sx={{ px: [1, 2] }}>
@@ -160,7 +154,6 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
   
   return (
     <>
-      {/* Mobile app bar with menu button */}
       {!isDesktop && (
         <Box
           sx={{
@@ -199,11 +192,10 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
             {t('app.title')}
           </Typography>
           
-          <Box sx={{ width: 40 }} /> {/* Empty box for alignment */}
+          <Box sx={{ width: 40 }} /> 
         </Box>
       )}
       
-      {/* Mobile drawer (temporary) */}
       <Drawer
         variant="temporary"
         open={mobileOpen}
@@ -220,7 +212,6 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
         {drawerContent}
       </Drawer>
       
-      {/* Desktop drawer (permanent) */}
       <Drawer
         variant="permanent"
         sx={{

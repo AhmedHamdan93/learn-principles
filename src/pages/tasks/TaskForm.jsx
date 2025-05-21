@@ -20,7 +20,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { format } from 'date-fns';
 
-// Default form values
+
 const defaultValues = {
   name: '',
   description: '',
@@ -33,7 +33,6 @@ const TaskForm = ({ task, onSubmit, isLoading }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   
-  // Initialize form with react-hook-form
   const {
     control,
     handleSubmit,
@@ -43,10 +42,8 @@ const TaskForm = ({ task, onSubmit, isLoading }) => {
     defaultValues: task || defaultValues,
   });
   
-  // Update form when editing an existing task
   useEffect(() => {
     if (task) {
-      // Format date properly if it exists
       const formattedTask = {
         ...task,
         dueDate: task.dueDate ? new Date(task.dueDate) : null,
@@ -55,9 +52,7 @@ const TaskForm = ({ task, onSubmit, isLoading }) => {
     }
   }, [task, reset]);
   
-  // Handle form submission
   const handleFormSubmit = (data) => {
-    // Format the due date if it exists
     const formattedData = {
       ...data,
       dueDate: data.dueDate ? format(new Date(data.dueDate), 'yyyy-MM-dd') : null,
@@ -65,7 +60,6 @@ const TaskForm = ({ task, onSubmit, isLoading }) => {
     onSubmit(formattedData);
   };
   
-  // Handle cancel button
   const handleCancel = () => {
     navigate('/tasks');
   };
@@ -75,7 +69,6 @@ const TaskForm = ({ task, onSubmit, isLoading }) => {
       <CardContent>
         <Box component="form" onSubmit={handleSubmit(handleFormSubmit)} noValidate>
           <Grid container spacing={3}>
-            {/* Task name */}
             <Grid item xs={12}>
               <Controller
                 name="name"
@@ -100,7 +93,6 @@ const TaskForm = ({ task, onSubmit, isLoading }) => {
               />
             </Grid>
             
-            {/* Description */}
             <Grid item xs={12}>
               <Controller
                 name="description"
@@ -126,7 +118,6 @@ const TaskForm = ({ task, onSubmit, isLoading }) => {
               />
             </Grid>
             
-            {/* Status */}
             <Grid item xs={12} sm={6}>
               <Controller
                 name="status"
@@ -154,7 +145,6 @@ const TaskForm = ({ task, onSubmit, isLoading }) => {
               />
             </Grid>
             
-            {/* Priority */}
             <Grid item xs={12} sm={6}>
               <Controller
                 name="priority"
@@ -182,7 +172,6 @@ const TaskForm = ({ task, onSubmit, isLoading }) => {
               />
             </Grid>
             
-            {/* Due date */}
             <Grid item xs={12}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Controller
@@ -205,7 +194,6 @@ const TaskForm = ({ task, onSubmit, isLoading }) => {
               </LocalizationProvider>
             </Grid>
             
-            {/* Form actions */}
             <Grid item xs={12}>
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mt: 2 }}>
                 <Button

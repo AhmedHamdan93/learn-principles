@@ -6,8 +6,7 @@ const useTaskStore = create((set, get) => ({
   loading: false,
   error: null,
   selectedTask: null,
-  
-  // Fetch all tasks
+
   fetchTasks: async () => {
     set({ loading: true, error: null });
     try {
@@ -20,13 +19,11 @@ const useTaskStore = create((set, get) => ({
     }
   },
   
-  // Create a new task
   createTask: async (task) => {
     set({ loading: true, error: null });
     try {
       const { data, error } = await createTask(task);
       if (error) throw error;
-      // We don't need to update the state here as the subscription will handle it
       set({ loading: false });
       return data?.[0];
     } catch (error) {
@@ -36,13 +33,11 @@ const useTaskStore = create((set, get) => ({
     }
   },
   
-  // Update an existing task
   updateTask: async (id, updates) => {
     set({ loading: true, error: null });
     try {
       const { data, error } = await updateTask(id, updates);
       if (error) throw error;
-      // We don't need to update the state here as the subscription will handle it
       set({ loading: false });
       return data?.[0];
     } catch (error) {
@@ -52,13 +47,11 @@ const useTaskStore = create((set, get) => ({
     }
   },
   
-  // Delete a task
   deleteTask: async (id) => {
     set({ loading: true, error: null });
     try {
       const { error } = await deleteTask(id);
       if (error) throw error;
-      // We don't need to update the state here as the subscription will handle it
       set({ loading: false });
       return true;
     } catch (error) {
@@ -68,12 +61,10 @@ const useTaskStore = create((set, get) => ({
     }
   },
   
-  // Set the selected task for editing
   setSelectedTask: (task) => {
     set({ selectedTask: task });
   },
   
-  // Handle real-time updates
   handleRealtimeUpdate: (payload) => {
     const { eventType, new: newRecord, old: oldRecord } = payload;
     

@@ -13,24 +13,20 @@ const EditTask = () => {
   const { tasks, fetchTasks, updateTask, loading, error } = useTaskStore();
   const [message, setMessage] = useState('');
   
-  // Find the task to edit
   const task = tasks.find((task) => task.id === id);
   
-  // Fetch tasks if not already loaded
   useEffect(() => {
     if (!tasks.length) {
       fetchTasks();
     }
   }, [fetchTasks, tasks.length]);
   
-  // Handle form submission
   const handleSubmit = async (taskData) => {
     try {
       const updatedTask = await updateTask(id, taskData);
       
       if (updatedTask) {
         setMessage(t('tasks.saveSuccess'));
-        // Navigate to task details after short delay
         setTimeout(() => {
           navigate(`/tasks/${id}`);
         }, 1500);
@@ -40,7 +36,6 @@ const EditTask = () => {
     }
   };
   
-  // Show loading screen if task not loaded yet
   if (loading || !task) {
     return <LoadingScreen />;
   }
